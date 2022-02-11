@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Colleague{% endblock %}
+
+{% block body %}
+    <h1>Colleague</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ colleague.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ colleague.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ colleague.email }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                {% if colleague.picture == '' %}
+                    <td>N/A</td>
+                {% else %}
+                    <td>
+                        <div class="color-swatches">
+                            <img src="/uploads/colleague_image{{ asset(colleague.picture) }}"class="img-fluid" alt="Image" height="100" width="100">
+                        </div>
+                    </td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ colleague.notes ?? 'N/A' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('colleague_index') }}">back to list</a>
+
+    <a href="{{ path('colleague_edit', {'id': colleague.id}) }}">edit</a>
+
+    {{ include('colleague/_delete_form.html.twig') }}
+{% endblock %}
